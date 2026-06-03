@@ -1,6 +1,6 @@
 workflow {
 
-  def file = "s3://liftoff-seqera-work/test_data/test_data.fastq.gz"
+  def file = "s3://liftoff-seqera-work/test_data/test.txt"
   def ch_fastq_files = channel.fromPath(file)
 
   CAT_FILES(ch_fastq_files)
