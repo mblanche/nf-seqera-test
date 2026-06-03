@@ -1,26 +1,20 @@
 workflow {
-
-  def file = "s3://liftoff-seqera-work/test_data/test.txt"
-  def ch_fastq_files = channel.fromPath(file)
+  def ch_fastq_files = channel.fromPath("s3://liftoff-seqera-work/test_data/test.txt")
 
   CAT_FILES(ch_fastq_files)
-
 }
 
 process CAT_FILES {
-  //label "process_low"
-
   container "ubuntu"
 
   input:
     path files
 
   output:
-    //tuple val(id), val(meta), path("*_merged.*"), emit: merge
-    stdout
+    path "merged.txt"
 
   script:
     """
-    echo test
+    cat ${files} ${files} > merged.txt
     """
 }
